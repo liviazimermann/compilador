@@ -84,8 +84,7 @@ IDENTIFICADOR: [a-zA-Z][a-zA-Z0-9_]*
 <cmd>
 <atribuicao>
 <atribuicao_interna>
-<acesso_ou_chamada>
-<desvio_simples>
+<acesso_ou_chamada><desvio_simples>
 <desvio_composto>
 <enquanto>
 <para>
@@ -177,6 +176,6 @@ IDENTIFICADOR: [a-zA-Z][a-zA-Z0-9_]*
             <termo> BIT_SHIFT_L #68 <fator> #65 | <termo> BIT_SHIFT_R #69 <fator> #65 |
             <fator> ;
 
-<fator> ::= DELIM_LPAREN <expr> DELIM_RPAREN | OP_NOT <fator> | OP_SUB <fator> | <acesso_ou_chamada> | <literal> ;
+<fator> ::= DELIM_LPAREN <expr> DELIM_RPAREN | OP_NOT <fator> | OP_SUB <fator> | <acesso_ou_chamada> #73 | <literal> ;
 
 <literal> ::= INT_LITERAL #70 | REAL_LITERAL #70 | BIN_LITERAL #70 | HEX_LITERAL #70 | CHAR_LITERAL #70 | STRING_LITERAL #70 | BOOL_VERDADEIRO #71 | BOOL_FALSO #72 ;
