@@ -7,54 +7,75 @@
     <x>0</x>
     <y>0</y>
     <width>903</width>
-    <height>692</height>
+    <height>750</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>janela</string>
+   <string>Compilador BIP</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+
+   <!-- Editor de código fonte -->
    <widget class="QTextEdit" name="inputCodigo">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>10</y>
       <width>881</width>
-      <height>441</height>
+      <height>280</height>
      </rect>
     </property>
     <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
+     <font><pointsize>14</pointsize></font>
     </property>
    </widget>
+
+   <!-- Área de mensagens de erro/sucesso -->
    <widget class="QTextEdit" name="outputErro">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
+    <property name="enabled"><bool>false</bool></property>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>460</y>
+      <y>300</y>
       <width>881</width>
-      <height>191</height>
+      <height>120</height>
      </rect>
     </property>
     <property name="font">
-     <font>
-      <pointsize>14</pointsize>
-     </font>
+     <font><pointsize>14</pointsize></font>
     </property>
-    <property name="readOnly">
-     <bool>true</bool>
+    <property name="readOnly"><bool>true</bool></property>
+    <property name="placeholderText">
+     <string>Mensagens do compilador...</string>
     </property>
    </widget>
+
+   <!-- Área do código Assembly gerado (NOVO - T4) -->
+   <widget class="QTextEdit" name="outputASM">
+    <property name="enabled"><bool>false</bool></property>
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>430</y>
+      <width>881</width>
+      <height>270</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font><pointsize>14</pointsize></font>
+    </property>
+    <property name="readOnly"><bool>true</bool></property>
+    <property name="placeholderText">
+     <string>Código Assembly BIP gerado aqui...</string>
+    </property>
+   </widget>
+
+   <!-- Botão Compilar -->
    <widget class="QPushButton" name="Compilar">
     <property name="geometry">
      <rect>
       <x>810</x>
-      <y>660</y>
+      <y>715</y>
       <width>80</width>
       <height>24</height>
      </rect>
@@ -63,6 +84,7 @@
      <string>Compilar</string>
     </property>
    </widget>
+
   </widget>
  </widget>
  <resources/>

@@ -5,7 +5,6 @@
 #include "Semantico.h"
 
 #include <iostream>
-
 using namespace std;
 
 janela::janela(QWidget *parent)
@@ -22,27 +21,35 @@ janela::~janela()
 
 void janela::on_Compilar_clicked()
 {
-    Lexico Lex;
+    Lexico    Lex;
     Sintatico Sint;
     Semantico Sem;
 
     QString codigoQt = ui->inputCodigo->toPlainText();
-    string codigoC = codigoQt.toStdString();
+    string  codigoC  = codigoQt.toStdString();
 
     Lex.setInput(codigoC.c_str());
 
+    // Limpa saídas anteriores
+    ui->outputErro->clear();
+    ui->outputASM->clear();
+
     try {
-        Sint.parse(&Lex,&Sem);
+        Sint.parse(&Lex, &Sem);
         ui->outputErro->setPlainText("Compilado com sucesso!");
-    } catch(LexicalError err) {
-        QString msgErro = QString::fromStdString(err.getMessage());
-        ui->outputErro->setPlainText("Problema lexico: " + msgErro);
+
+        // Exibe o código Assembly gerado
+        QString asmCode = QString::fromStdString(Sem.getCodigoASM());
+        ui->outputASM->setPlainText(asmCode);
+
+    } catch (LexicalError err) {
+        ui->outputErro->setPlainText(
+            "Problema lexico: " + QString::fromStdString(err.getMessage()));
     } catch (SyntacticError err) {
-        QString msgErro = QString::fromStdString(err.getMessage());
-        ui->outputErro->setPlainText("Problema sintatico: " + msgErro);
+        ui->outputErro->setPlainText(
+            "Problema sintatico: " + QString::fromStdString(err.getMessage()));
     } catch (SemanticError err) {
-        QString msgErro = QString::fromStdString(err.getMessage());
-        ui->outputErro->setPlainText("Problema semantico: " + msgErro);
+        ui->outputErro->setPlainText(
+            "Problema semantico: " + QString::fromStdString(err.getMessage()));
     }
 }
-
