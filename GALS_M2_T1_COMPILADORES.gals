@@ -119,7 +119,7 @@ IDENTIFICADOR: [a-zA-Z][a-zA-Z0-9_]*
 <programa> ::= <parte_decl> <bloco> | <parte_decl> | <bloco> ;
 
 <cabecalho_subrotina> ::= <tipo_retorno> IDENTIFICADOR #4 DELIM_LPAREN ;
-<def_subrotina> ::= <cabecalho_subrotina> <params> DELIM_RPAREN <bloco> #5 
+<def_subrotina> ::= <cabecalho_subrotina> <params> DELIM_RPAREN <bloco> #5
                   | <cabecalho_subrotina> DELIM_RPAREN <bloco> #5 ;
 <tipo_retorno> ::= <tipo> #1 | NULO #1 ;
 <tipo> ::= TIPO_INTEIRO | TIPO_REAL | TIPO_CHAR | TIPO_STRING | TIPO_BOOLEANO | TIPO_DOBRO ;
@@ -128,14 +128,14 @@ IDENTIFICADOR: [a-zA-Z][a-zA-Z0-9_]*
            | <params> PONT_COMMA IDENTIFICADOR #7 DELIM_LSB <expr> DELIM_RSB #27 PONT_COLON <tipo> #1
            | IDENTIFICADOR #6 PONT_COLON <tipo> #1
            | IDENTIFICADOR #7 DELIM_LSB <expr> DELIM_RSB #27 PONT_COLON <tipo> #1 ;
-           
+
 <parte_decl> ::= <parte_decl> <decl> | <parte_decl> <def_subrotina> | <decl> | <def_subrotina> ;
 <decl> ::= VAR <lista_ids> PONT_COLON <tipo> #1 PONT_SEMICOLON ;
 
-<lista_ids> ::= <lista_ids> PONT_COMMA IDENTIFICADOR #2 
+<lista_ids> ::= <lista_ids> PONT_COMMA IDENTIFICADOR #2
               | <lista_ids> PONT_COMMA IDENTIFICADOR #3 DELIM_LSB <expr> DELIM_RSB #27
-              | IDENTIFICADOR #2 
-              | IDENTIFICADOR #3 DELIM_LSB <expr> DELIM_RSB #27;
+              | IDENTIFICADOR #2
+              | IDENTIFICADOR #3 DELIM_LSB <expr> DELIM_RSB #27 ;
 
 <bloco> ::= DELIM_LBRACE <lista_cmd> DELIM_RBRACE | DELIM_LBRACE DELIM_RBRACE ;
 <bloco_interno> ::= <abre_escopo> DELIM_LBRACE <lista_cmd> DELIM_RBRACE <fecha_escopo> | <abre_escopo> DELIM_LBRACE DELIM_RBRACE <fecha_escopo> ;
@@ -145,16 +145,16 @@ IDENTIFICADOR: [a-zA-Z][a-zA-Z0-9_]*
 <lista_cmd> ::= <lista_cmd> <cmd> | <cmd> ;
 <cmd> ::= <decl> | <atribuicao> | <desvio_simples> | <desvio_composto> | <enquanto> | <para> | <faca_enquanto> | <leia> | <escreva> | <acesso_ou_chamada> PONT_SEMICOLON ;
 
-<atribuicao_prefix> ::= <acesso_ou_chamada> OP_ASSIGN #16 ;
-<atribuicao> ::= <atribuicao_prefix> <expr> #17 PONT_SEMICOLON ;
-<atribuicao_interna> ::= <atribuicao_prefix> <expr> #17 ;
-<leia> ::= LEIA DELIM_LPAREN <acesso_ou_chamada> DELIM_RPAREN #11 PONT_SEMICOLON ;
+<atribuicao_prefix> ::= <acesso_ou_chamada> OP_ASSIGN #16 #28 ;
+<atribuicao> ::= <atribuicao_prefix> <expr> #17 #29 PONT_SEMICOLON ;
+<atribuicao_interna> ::= <atribuicao_prefix> <expr> #17 #29 ;
+<leia> ::= LEIA DELIM_LPAREN <acesso_ou_chamada> DELIM_RPAREN #11 #36 PONT_SEMICOLON ;
 
 <id_acesso> ::= IDENTIFICADOR #18 ;
-<acesso_ou_chamada> ::= <id_acesso> DELIM_LPAREN #24 <lista_args> DELIM_RPAREN #25 
-                      | <id_acesso> DELIM_LPAREN DELIM_RPAREN #26 
-                      | <id_acesso> DELIM_LSB <expr> DELIM_RSB #19 #10 
-                      | <id_acesso> #10 ;
+<acesso_ou_chamada> ::= <id_acesso> DELIM_LPAREN #24 <lista_args> DELIM_RPAREN #25
+                      | <id_acesso> DELIM_LPAREN DELIM_RPAREN #26
+                      | <id_acesso> DELIM_LSB <expr> DELIM_RSB #19 #10 #34
+                      | <id_acesso> #10 #32 ;
 
 <desvio_simples> ::= SE DELIM_LPAREN <expr> DELIM_RPAREN <bloco_interno> FIM ;
 <desvio_composto> ::= SE DELIM_LPAREN <expr> DELIM_RPAREN <bloco_interno> SENAO <bloco_interno> FIM ;
@@ -162,13 +162,11 @@ IDENTIFICADOR: [a-zA-Z][a-zA-Z0-9_]*
 <para> ::= PARA DELIM_LPAREN <atribuicao_interna> PONT_SEMICOLON <expr> PONT_SEMICOLON <atribuicao_interna> DELIM_RPAREN <bloco_interno> ;
 <faca_enquanto> ::= FACA <bloco_interno> ENQUANTO DELIM_LPAREN <expr> DELIM_RPAREN PONT_SEMICOLON ;
 
-<leia> ::= LEIA DELIM_LPAREN <acesso_ou_chamada> DELIM_RPAREN #11 PONT_SEMICOLON ;
-
 <escreva> ::= ESCREVA DELIM_LPAREN <lista_args> DELIM_RPAREN PONT_SEMICOLON | ESCREVA DELIM_LPAREN DELIM_RPAREN PONT_SEMICOLON ;
 
 <lista_args> ::= <lista_args> PONT_COMMA <arg> | <arg> ;
 
-<arg> ::= <expr> #23 ;
+<arg> ::= <expr> #23 #38 ;
 <expr> ::= <expr_log_ou> ;
 
 <expr_log_ou> ::= <expr_log_ou> <op_log_ou> <expr_log_e> #22 | <expr_log_e> ;
@@ -178,13 +176,13 @@ IDENTIFICADOR: [a-zA-Z][a-zA-Z0-9_]*
 <op_log_e> ::= OP_AND #20 ;
 
 <expr_rel> ::= <expr_rel> <op_rel> <expr_arit> #13 | <expr_arit> ;
-<op_rel> ::= OP_IGUAL | OP_DIFERENTE | OP_MAIOR | OP_MENOR | OP_MAIOR_IGUAL | OP_MENOR_IGUAL ; 
+<op_rel> ::= OP_IGUAL | OP_DIFERENTE | OP_MAIOR | OP_MENOR | OP_MAIOR_IGUAL | OP_MENOR_IGUAL ;
 
 <expr_arit> ::= <expr_arit> <op_soma> <termo> #14 | <termo> ;
-<op_soma> ::= OP_SOMA #20 | OP_SUB #20 ;
+<op_soma> ::= OP_SOMA #20 #31 | OP_SUB #20 #31 | BIT_OR #20 #31 | BIT_XOR #20 #31 | BIT_SHIFT_L #20 #31 | BIT_SHIFT_R #20 #31 ;
 
 <termo> ::= <termo> <op_mult> <fator> #15 | <fator> ;
-<op_mult> ::= OP_MULT #20 | OP_DIV #20 | OP_MOD #20 ;
+<op_mult> ::= OP_MULT #20 #31 | OP_DIV #20 #31 | OP_MOD #20 #31 | BIT_AND #20 #31 ;
 
-<fator> ::= DELIM_LPAREN <expr> DELIM_RPAREN | OP_NOT <fator> | OP_SUB <fator> | <acesso_ou_chamada> | <literal> ;
-<literal> ::= INT_LITERAL #12 | REAL_LITERAL #12 | BIN_LITERAL #12 | HEX_LITERAL #12 | CHAR_LITERAL #12 | STRING_LITERAL #12 | BOOL_VERDADEIRO #12 | BOOL_FALSO #12 ;
+<fator> ::= DELIM_LPAREN <expr> DELIM_RPAREN | OP_NOT <fator> | BIT_NOT #39 <fator> | OP_SUB <fator> | <acesso_ou_chamada> | <literal> ;
+<literal> ::= INT_LITERAL #12 #33 | REAL_LITERAL #12 #33 | BIN_LITERAL #12 #33 | HEX_LITERAL #12 #33 | CHAR_LITERAL #12 #33 | STRING_LITERAL #12 #33 | BOOL_VERDADEIRO #12 #33 | BOOL_FALSO #12 #33 ;
