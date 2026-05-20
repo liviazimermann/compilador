@@ -1,0 +1,140 @@
+#Options
+GenerateScanner = true
+GenerateParser = true
+Language = C++
+ScannerName = Lexico
+ParserName = Sintatico
+SemanticName = Semantico
+ScannerCaseSensitive = true
+ScannerTable = Full
+Input = String
+Parser = SLR
+#RegularDefinitions
+
+#Tokens
+VAR: "var"
+SE: "se"
+ENTAO: "entao"
+SENAO: "senao"
+FIM: "fim"
+TIPO_INTEIRO: "inteiro"
+TIPO_REAL: "real"
+TIPO_CHAR: "char"
+TIPO_STRING: "string"
+TIPO_BOOLEANO: "booleano"
+TIPO_DOBRO: "dobro"
+BOOL_VERDADEIRO: "verdadeiro"
+BOOL_FALSO: "falso"
+ENQUANTO: "enquanto"
+PARA: "para"
+FACA: "faca"
+LEIA: "leia"
+ESCREVA: "escreva"
+NULO: "nulo"
+OP_MAIOR_IGUAL: ">="
+OP_MENOR_IGUAL: "<="
+OP_IGUAL: "=="
+OP_DIFERENTE: "!="
+OP_MAIOR: ">"
+OP_MENOR: "<"
+OP_SOMA: "+"
+OP_SUB: "-"
+OP_MULT: "*"
+OP_DIV: "/"
+OP_MOD: "%"
+OP_AND: "&&"
+OP_OR: "||"
+OP_NOT: "!"
+BIT_SHIFT_R: ">>"
+BIT_SHIFT_L: "<<"
+BIT_AND: "&"
+BIT_OR: "|"
+BIT_NOT: "~"
+BIT_XOR: "^"
+DELIM_LPAREN: "("
+DELIM_RPAREN: ")"
+DELIM_LSB: "["
+DELIM_RSB: "]"
+DELIM_LBRACE: "{"
+DELIM_RBRACE: "}"
+PONT_SEMICOLON: ";"
+PONT_COMMA: ","
+PONT_DOT: "."
+PONT_COLON: ":"
+OP_ASSIGN: "="
+INT_LITERAL: [0-9]+
+REAL_LITERAL: [0-9]+\.[0-9]+
+BIN_LITERAL: 0b[01]+
+HEX_LITERAL: 0x[0-9a-fA-F]+
+CHAR_LITERAL: '[^\39]'
+STRING_LITERAL: \"[^\34]*\"
+IDENTIFICADOR: [a-zA-Z][a-zA-Z0-9_]*
+: [/][/].*
+: "/*"([^\*]|\*+[^/\*])*\*+"/"
+:[\n\s\t\r]*
+#NonTerminals
+<programa>
+<parte_decl>
+<decl>
+<tipo>
+<lista_ids>
+<bloco>
+<lista_cmd>
+<cmd>
+<atribuicao>
+<atribuicao_interna>
+<acesso_ou_chamada>
+<desvio_simples>
+<desvio_composto>
+<enquanto>
+<para>
+<faca_enquanto>
+<leia>
+<escreva>
+<def_subrotina>
+<tipo_retorno>
+<params>
+<lista_args>
+<arg>
+<expr>
+<expr_log_ou>
+<expr_log_e>
+<expr_rel>
+<op_rel>
+<expr_arit>
+<termo>
+<fator>
+<literal>
+#Grammar
+<programa> ::= <parte_decl> <bloco> | <parte_decl> | <bloco>;
+<parte_decl> ::= <parte_decl> <decl> | <parte_decl> <def_subrotina> | <decl> | <def_subrotina> ;
+<decl> ::= VAR <lista_ids> PONT_COLON <tipo> PONT_SEMICOLON ;
+<tipo> ::= TIPO_INTEIRO | TIPO_REAL | TIPO_CHAR | TIPO_STRING | TIPO_BOOLEANO | TIPO_DOBRO ;
+<lista_ids> ::= <lista_ids> PONT_COMMA IDENTIFICADOR | <lista_ids> PONT_COMMA IDENTIFICADOR DELIM_LSB INT_LITERAL DELIM_RSB | IDENTIFICADOR | IDENTIFICADOR DELIM_LSB INT_LITERAL DELIM_RSB ;
+<bloco> ::= DELIM_LBRACE <lista_cmd> DELIM_RBRACE | DELIM_LBRACE DELIM_RBRACE ;
+<lista_cmd> ::= <lista_cmd> <cmd> | <cmd> ;
+<cmd> ::= <decl> | <atribuicao> | <desvio_simples> | <desvio_composto> | <enquanto> | <para> | <faca_enquanto> | <leia> | <escreva> | <acesso_ou_chamada> PONT_SEMICOLON ;
+<atribuicao> ::= <acesso_ou_chamada> OP_ASSIGN <expr> PONT_SEMICOLON ;
+<atribuicao_interna> ::= <acesso_ou_chamada> OP_ASSIGN <expr> ;
+<acesso_ou_chamada> ::= IDENTIFICADOR DELIM_LPAREN <lista_args> DELIM_RPAREN | IDENTIFICADOR DELIM_LPAREN DELIM_RPAREN | IDENTIFICADOR DELIM_LSB <expr> DELIM_RSB | IDENTIFICADOR ;
+<desvio_simples> ::= SE DELIM_LPAREN <expr> DELIM_RPAREN <bloco> FIM ;
+<desvio_composto> ::= SE DELIM_LPAREN <expr> DELIM_RPAREN <bloco> SENAO <bloco> FIM ;
+<enquanto> ::= ENQUANTO DELIM_LPAREN <expr> DELIM_RPAREN <bloco> ;
+<para> ::= PARA DELIM_LPAREN <atribuicao_interna> PONT_SEMICOLON <expr> PONT_SEMICOLON <atribuicao_interna> DELIM_RPAREN <bloco> ;
+<faca_enquanto> ::= FACA <bloco> ENQUANTO DELIM_LPAREN <expr> DELIM_RPAREN PONT_SEMICOLON ;
+<leia> ::= LEIA DELIM_LPAREN <acesso_ou_chamada> DELIM_RPAREN PONT_SEMICOLON ;
+<escreva> ::= ESCREVA DELIM_LPAREN <lista_args> DELIM_RPAREN PONT_SEMICOLON | ESCREVA DELIM_LPAREN DELIM_RPAREN PONT_SEMICOLON ;
+<def_subrotina> ::= <tipo_retorno> IDENTIFICADOR DELIM_LPAREN <params> DELIM_RPAREN <bloco> | <tipo_retorno> IDENTIFICADOR DELIM_LPAREN DELIM_RPAREN <bloco> ;
+<tipo_retorno> ::= <tipo> | NULO ;
+<params> ::= <params> PONT_COMMA IDENTIFICADOR PONT_COLON <tipo> | <params> PONT_COMMA IDENTIFICADOR DELIM_LSB INT_LITERAL DELIM_RSB PONT_COLON <tipo> | IDENTIFICADOR PONT_COLON <tipo> | IDENTIFICADOR DELIM_LSB INT_LITERAL DELIM_RSB PONT_COLON <tipo> ;
+<lista_args> ::= <lista_args> PONT_COMMA <arg> | <arg> ;
+<arg> ::= <expr> ;
+<expr> ::= <expr_log_ou> ;
+<expr_log_ou> ::= <expr_log_ou> OP_OR <expr_log_e> | <expr_log_e> ;
+<expr_log_e> ::= <expr_log_e> OP_AND <expr_rel> | <expr_rel> ;
+<expr_rel> ::= <expr_rel> <op_rel> <expr_arit> | <expr_arit> ;
+<op_rel> ::= OP_IGUAL | OP_DIFERENTE | OP_MAIOR | OP_MENOR | OP_MAIOR_IGUAL | OP_MENOR_IGUAL ;
+<expr_arit> ::= <expr_arit> OP_SOMA <termo> | <expr_arit> OP_SUB <termo> | <termo> ;
+<termo> ::= <termo> OP_MULT <fator> | <termo> OP_DIV <fator> | <termo> OP_MOD <fator> | <fator> ;
+<fator> ::= DELIM_LPAREN <expr> DELIM_RPAREN | OP_NOT <fator> | OP_SUB <fator> | <acesso_ou_chamada> | <literal> ;
+<literal> ::= INT_LITERAL | REAL_LITERAL | BIN_LITERAL | HEX_LITERAL | CHAR_LITERAL | STRING_LITERAL | BOOL_VERDADEIRO | BOOL_FALSO ;

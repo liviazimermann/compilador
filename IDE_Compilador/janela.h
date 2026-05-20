@@ -2,8 +2,6 @@
 #define JANELA_H
 
 #include <QMainWindow>
-#include <QTableWidget>
-#include "Semantico.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -24,8 +22,5 @@ private slots:
 
 private:
     Ui::janela *ui;
-
-    void exibirTabelaSimbolos(const Semantico& sem);
 };
-
 #endif // JANELA_H
