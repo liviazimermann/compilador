@@ -1,0 +1,4 @@
+var r : inteiro;
+{
+    r = coisa(1, 2);
+}

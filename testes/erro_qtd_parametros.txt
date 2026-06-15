@@ -1,0 +1,5 @@
+inteiro teste(a : inteiro, b : inteiro) { retorne a; }
+var r : inteiro;
+{
+    r = teste(5);
+}

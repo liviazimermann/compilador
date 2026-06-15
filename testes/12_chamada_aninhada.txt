@@ -1,0 +1,6 @@
+inteiro mais1(x : inteiro) { retorne x + 1; }
+var r : inteiro;
+{
+    r = mais1(mais1(3));
+    escreva(r);
+}

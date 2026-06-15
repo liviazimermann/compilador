@@ -1,0 +1,8 @@
+nulo imprime(x : inteiro) {
+    escreva(x);
+}
+var k : inteiro;
+{
+    k = 7;
+    imprime(k);
+}

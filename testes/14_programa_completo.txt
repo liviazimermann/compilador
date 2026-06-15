@@ -1,0 +1,14 @@
+inteiro maior(a : inteiro, b : inteiro) {
+    se (a > b) {
+        retorne a;
+    } senao {
+        retorne b;
+    } fim
+}
+var x, y, z : inteiro;
+{
+    leia(x);
+    leia(y);
+    z = maior(x, y);
+    escreva(z);
+}

@@ -1,0 +1,7 @@
+var x : inteiro;
+{
+    x = 3;
+    se (x > 0) {
+        escreva(x);
+    } fim
+}

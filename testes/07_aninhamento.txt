@@ -1,0 +1,12 @@
+var i, j : inteiro;
+{
+    j = 0;
+    para (i = 0; i < 3; i = i + 1) {
+        enquanto (j < i) {
+            se (j == 1) {
+                escreva(j);
+            } fim
+            j = j + 1;
+        }
+    }
+}

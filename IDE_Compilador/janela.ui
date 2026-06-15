@@ -6,85 +6,183 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>903</width>
-    <height>750</height>
+    <width>1588</width>
+    <height>827</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Compilador BIP</string>
+   <string>Compilador - IDE</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-
-   <!-- Editor de código fonte -->
    <widget class="QTextEdit" name="inputCodigo">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>881</width>
-      <height>280</height>
+      <width>1031</width>
+      <height>551</height>
      </rect>
     </property>
     <property name="font">
-     <font><pointsize>14</pointsize></font>
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="placeholderText">
+     <string>Digite o código aqui...</string>
     </property>
    </widget>
-
-   <!-- Área de mensagens de erro/sucesso -->
    <widget class="QTextEdit" name="outputErro">
-    <property name="enabled"><bool>false</bool></property>
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>300</y>
-      <width>881</width>
-      <height>120</height>
+      <y>570</y>
+      <width>1031</width>
+      <height>251</height>
      </rect>
     </property>
     <property name="font">
-     <font><pointsize>14</pointsize></font>
+     <font>
+      <pointsize>12</pointsize>
+     </font>
     </property>
-    <property name="readOnly"><bool>true</bool></property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
     <property name="placeholderText">
      <string>Mensagens do compilador...</string>
     </property>
    </widget>
-
-   <!-- Área do código Assembly gerado (NOVO - T4) -->
-   <widget class="QTextEdit" name="outputASM">
-    <property name="enabled"><bool>false</bool></property>
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>430</y>
-      <width>881</width>
-      <height>270</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font><pointsize>14</pointsize></font>
-    </property>
-    <property name="readOnly"><bool>true</bool></property>
-    <property name="placeholderText">
-     <string>Código Assembly BIP gerado aqui...</string>
-    </property>
-   </widget>
-
-   <!-- Botão Compilar -->
    <widget class="QPushButton" name="Compilar">
     <property name="geometry">
      <rect>
-      <x>810</x>
-      <y>715</y>
-      <width>80</width>
-      <height>24</height>
+      <x>1480</x>
+      <y>780</y>
+      <width>100</width>
+      <height>30</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>Compilar</string>
     </property>
    </widget>
-
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="geometry">
+     <rect>
+      <x>1050</x>
+      <y>10</y>
+      <width>531</width>
+      <height>751</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="widget">
+     <attribute name="title">
+      <string>Tabela de símbolos</string>
+     </attribute>
+     <widget class="QTableWidget" name="tabelaSimbolos">
+      <property name="geometry">
+       <rect>
+        <x>9</x>
+        <y>10</y>
+        <width>511</width>
+        <height>701</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+      <property name="alternatingRowColors">
+       <bool>true</bool>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::SelectionMode::NoSelection</enum>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+      <column>
+       <property name="text">
+        <string>ID</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Tipo</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Escopo</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Modalidade</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Inicializado</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Usada</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Num. Param</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Tamanho</string>
+       </property>
+      </column>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_4">
+     <attribute name="title">
+      <string>Código ASM</string>
+     </attribute>
+     <widget class="QTextEdit" name="outputAsm">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>511</width>
+        <height>701</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Courier New</family>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+      <property name="placeholderText">
+       <string>Código assembly gerado...</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
   </widget>
  </widget>
  <resources/>

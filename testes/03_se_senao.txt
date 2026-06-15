@@ -1,0 +1,9 @@
+var x : inteiro;
+{
+    leia(x);
+    se (x >= 10) {
+        escreva(1);
+    } senao {
+        escreva(0);
+    } fim
+}

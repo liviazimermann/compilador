@@ -1,0 +1,8 @@
+var a, b : inteiro;
+var c : booleano;
+{
+    a = 5;
+    b = -a;
+    c = !(a < 0);
+    escreva(b);
+}

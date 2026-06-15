@@ -1,0 +1,8 @@
+var v[5] : inteiro;
+var i : inteiro;
+{
+    i = 2;
+    v[i] = 10;
+    v[0] = v[i] + 1;
+    escreva(v[0]);
+}

@@ -1,0 +1,8 @@
+inteiro soma(a : inteiro, b : inteiro) {
+    retorne a + b;
+}
+var r : inteiro;
+{
+    r = soma(3, 4);
+    escreva(r);
+}

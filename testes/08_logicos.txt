@@ -1,0 +1,10 @@
+var a, b : inteiro;
+var r : booleano;
+{
+    a = 5; b = 3;
+    se (a > 0 && b < 10) {
+        escreva(1);
+    } fim
+    r = a > b || b == 0;
+    escreva(r);
+}
